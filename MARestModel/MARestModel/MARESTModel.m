@@ -70,8 +70,11 @@
 
 + (NSString *)urlStringWithObjectId:(NSString *)objectId
 {
-    // over-ride
-    return @"";
+    // over-ride, if needed
+    NSString *baseUrl = [self baseUrl];
+    NSString *objectIdFormatted = objectId ? [NSString stringWithFormat:@"/%@", objectId] : @"";
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@", baseUrl, [self api], objectIdFormatted];
+    return urlString;
 }
 
 + (id<AbstractJSONModelProtocol>)_getObjectForJSON:(id)JSON objectReturnType:(NSString *)objectReturnType
